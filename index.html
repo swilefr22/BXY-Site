@@ -2161,44 +2161,65 @@
         // Login Handler
         function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('login-email').value;
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
             const password = document.getElementById('login-password').value;
 
-            if (email && password) {
-                // Verificar se a conta existe
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const user = users.find(u => u.email === email && u.password === password);
+            if (!email || !password) {
+                showNotification('❌ Digite email e senha!');
+                return;
+            }
 
-                if (user) {
-                    localStorage.setItem('userEmail', email);
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('userName', user.name);
+            // Verificar se a conta existe
+            let users = [];
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (e) {
+                users = [];
+            }
 
-                    document.getElementById('landing').style.display = 'none';
-                    document.getElementById('products').style.display = 'block';
-                    document.getElementById('dashboard').style.display = 'none';
-                    
-                    updateDashboard();
-                    updateSidebarUser();
-                    closeModal();
-                    
-                    showNotification('✓ Login realizado com sucesso!');
-                    window.scrollTo(0, 0);
-                } else {
-                    showNotification('❌ Email ou senha incorretos!');
-                }
+            console.log('Tentando login com:', email);
+            console.log('Usuários no sistema:', users);
+
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userName', user.name);
+
+                document.getElementById('landing').style.display = 'none';
+                document.getElementById('products').style.display = 'block';
+                document.getElementById('dashboard').style.display = 'none';
+                
+                updateDashboard();
+                updateSidebarUser();
+                closeModal();
+                
+                // Limpar campos
+                document.getElementById('login-email').value = '';
+                document.getElementById('login-password').value = '';
+                
+                showNotification('✓ Login realizado com sucesso!');
+                window.scrollTo(0, 0);
+            } else {
+                showNotification('❌ Email ou senha incorretos!');
             }
         }
 
         // Register Handler
         function handleRegister(event) {
             event.preventDefault();
-            const name = document.getElementById('register-name').value;
-            const email = document.getElementById('register-email').value;
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim().toLowerCase();
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm').value;
 
             // Validações
+            if (!name || !email || !password) {
+                showNotification('❌ Preencha todos os campos!');
+                return;
+            }
+
             if (password !== confirmPassword) {
                 showNotification('❌ As senhas não correspondem!');
                 return;
@@ -2210,7 +2231,14 @@
             }
 
             // Verificar se o email já existe
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            let users = [];
+            try {
+                users = JSON.parse(localStorage.getItem('users') || '[]');
+            } catch (e) {
+                users = [];
+                localStorage.setItem('users', '[]');
+            }
+
             if (users.find(u => u.email === email)) {
                 showNotification('❌ Este email já está cadastrado!');
                 return;
@@ -2228,6 +2256,10 @@
             users.push(newUser);
             localStorage.setItem('users', JSON.stringify(users));
 
+            // Verificar se foi salvo
+            const savedUsers = JSON.parse(localStorage.getItem('users'));
+            console.log('Usuários salvos:', savedUsers);
+
             // Fazer login automaticamente
             localStorage.setItem('userEmail', email);
             localStorage.setItem('isLoggedIn', 'true');
@@ -2240,6 +2272,13 @@
             updateDashboard();
             updateSidebarUser();
             closeModal();
+            
+            // Limpar campos
+            document.getElementById('register-name').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-password').value = '';
+            document.getElementById('register-confirm').value = '';
+            document.getElementById('register-terms').checked = false;
             
             showNotification('✓ Conta criada e login realizado com sucesso!');
             window.scrollTo(0, 0);
