@@ -19,6 +19,171 @@
             line-height: 1.6;
         }
 
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-right: 2px solid #333;
+            z-index: 200;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1rem;
+        }
+
+        .sidebar-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-sidebar:hover {
+            color: #aaa;
+            transform: rotate(90deg);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            margin: 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #aaa;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: #fff;
+            padding-left: 1.7rem;
+        }
+
+        .sidebar-menu a i {
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+
+        .sidebar-user {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .sidebar-user-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-user-email {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-logout {
+            background: #ff4444;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-logout:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 150;
+            display: none;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+
+        .sidebar-toggle:hover {
+            color: #aaa;
+        }
+
+        .cart-notification {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
         /* Header and Navigation */
         header {
             background: #000;
@@ -43,6 +208,7 @@
             font-weight: 900;
             letter-spacing: 2px;
             color: #fff;
+            flex: 1;
         }
 
         .logo span {
@@ -51,13 +217,59 @@
             padding-bottom: 2px;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 1.5rem;
+            margin: 0 0.4rem;
             font-weight: 500;
             transition: all 0.3s ease;
             cursor: pointer;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #fff;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 40px;
+        }
+
+        .cart-icon:hover {
+            color: #ddd;
+            transform: scale(1.1);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
 
         nav a:hover {
@@ -417,6 +629,63 @@
             transform: scale(1.02);
         }
 
+        /* Auth Tabs */
+        .auth-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #333;
+        }
+
+        .auth-tab {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #aaa;
+            padding: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .auth-tab:hover {
+            color: #fff;
+        }
+
+        .auth-tab.active {
+            color: #fff;
+        }
+
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #fff;
+        }
+
+        .auth-tab-content {
+            display: none;
+        }
+
+        .auth-tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Dashboard */
         .dashboard {
             display: none;
@@ -533,20 +802,55 @@
             color: #fff;
         }
 
+        /* Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 0.75rem 0;
+            }
+
+            .sidebar-toggle {
+                display: block;
+                padding: 0.5rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
             .header-container {
-                flex-direction: column;
-                gap: 1rem;
+                flex-direction: row;
+                gap: 0.5rem;
                 padding: 0 1rem;
+                justify-content: space-between;
             }
 
             nav {
-                display: flex;
-                flex-direction: column;
+                display: flex !important;
                 gap: 0.5rem;
-                width: 100%;
-                text-align: center;
+                align-items: center;
+            }
+
+            nav a {
+                display: none;
+            }
+
+            .cart-icon {
+                display: flex !important;
+                font-size: 1.3rem;
+                margin-left: 0;
+                margin-right: 0.5rem;
+            }
+
+            .auth-btn {
+                display: none;
+            }
+
+            .logo {
+                font-size: 1.5rem;
             }
 
             nav a {
@@ -580,6 +884,24 @@
 
             .modal-content {
                 width: 95%;
+                max-height: 90vh;
+            }
+
+            .cart-modal-content {
+                max-width: 95%;
+                max-height: 85vh;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+
+            .footer-links a {
+                font-size: 0.9rem;
             }
         }
 
@@ -749,18 +1071,342 @@
                 justify-content: center;
             }
         }
+
+        /* Contact Modal */
+        .contact-modal-content {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-subtitle {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        .contact-info {
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            color: #fff;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .info-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            color: #999;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .contact-btn-primary {
+            background: #fff;
+            color: #000;
+            border: 2px solid #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn-primary:hover {
+            background: #000;
+            color: #fff;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .contact-btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn-secondary:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        /* Cart Modal */
+        .cart-modal-content {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #333;
+        }
+
+        .cart-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-plan {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .cart-item-remove {
+            background: #ff4444;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item-remove:hover {
+            background: #cc0000;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #aaa;
+            padding: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .cart-summary {
+            background: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            color: #aaa;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #333;
+            padding-top: 0.8rem;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .cart-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn:hover {
+            background: #ddd;
+            transform: scale(1.02);
+        }
+
+        .cart-btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cart-btn-secondary:hover {
+            background: #fff;
+            color: #000;
+        }
     </style>
 </head>
 <body>
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">PHANTOM</div>
+            <button class="close-sidebar" onclick="toggleSidebar()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a onclick="showLanding(); toggleSidebar()">
+                <i class="fa-solid fa-home"></i> Início
+            </a></li>
+            <li><a onclick="scrollToProducts(); toggleSidebar()">
+                <i class="fa-solid fa-gamepad"></i> Produtos
+            </a></li>
+            <li><a onclick="openCart(); toggleSidebar()" style="position: relative;">
+                <i class="fa-solid fa-shopping-cart"></i> Carrinho
+                <span id="sidebarCartBadge" class="cart-notification" style="display: none;">0</span>
+            </a></li>
+            <li><a onclick="toggleDashboard(); toggleSidebar()">
+                <i class="fa-solid fa-chart-line"></i> Dashboard
+            </a></li>
+            <li><a onclick="showContactModal(); toggleSidebar()">
+                <i class="fa-solid fa-headset"></i> Suporte
+            </a></li>
+        </ul>
+
+        <div id="sidebarUserSection" class="sidebar-user" style="display: none;">
+            <div class="sidebar-user-name" id="sidebarUserName">Usuário</div>
+            <button class="sidebar-logout" onclick="logout(); toggleSidebar()">
+                <i class="fa-solid fa-sign-out"></i> Sair
+            </button>
+        </div>
+
+        <div id="sidebarLoginSection" style="padding: 1.5rem; border-top: 1px solid #333; text-align: center;">
+            <button onclick="showLogin(); toggleSidebar()" style="background: #fff; color: #000; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s ease;">
+                <i class="fa-solid fa-sign-in"></i> Entrar / Criar Conta
+            </button>
+        </div>
+    </aside>
+
     <!-- Header -->
     <header>
         <div class="header-container">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <div class="logo">PHAN<span>TOM</span></div>
             <nav>
-                <a onclick="showLanding()">Home</a>
+                <a onclick="showLanding()">Inicio</a>
                 <a onclick="scrollToProducts()">Produtos</a>
-                <a href="#footer" onclick="scrollToFooter()">Contato</a>
-                <button class="auth-btn" onclick="showLogin()">Login</button>
+                <a onclick="showContactModal()">Contato</a>
+                <button class="cart-icon" onclick="openCart()">
+                    <i class="fa-solid fa-shopping-cart"></i>
+                    <span class="cart-badge" style="display: none;">0</span>
+                </button>
+                <button class="auth-btn" onclick="toggleDashboard()">Dashboard</button>
             </nav>
         </div>
     </header>
@@ -800,6 +1446,9 @@
                 <div class="profile-buttons">
                     <button class="profile-btn" onclick="window.open('https://discord.com/users/1285045977614516284', '_blank')">
                         <i class="fab fa-discord"></i> Discord
+                    </button>
+                    <button class="profile-btn-secondary" onclick="window.open('https://discord.gg/phantom', '_blank')">
+                        <i class="fas fa-crown"></i> PHANTOM
                     </button>
                 </div>
             </div>
@@ -876,7 +1525,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('CS:GO', 'Diário')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('CS:GO', 'Diário', '9.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Semanal</div>
@@ -888,7 +1537,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('CS:GO', 'Semanal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('CS:GO', 'Semanal', '49.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Mensal</div>
@@ -900,7 +1549,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('CS:GO', 'Mensal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('CS:GO', 'Mensal', '179.99')">Comprar</button>
                 </div>
             </div>
         </div>
@@ -922,7 +1571,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Valorant', 'Diário')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Valorant', 'Diário', '12.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Semanal</div>
@@ -934,7 +1583,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Valorant', 'Semanal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Valorant', 'Semanal', '59.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Mensal</div>
@@ -946,7 +1595,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Valorant', 'Mensal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Valorant', 'Mensal', '199.99')">Comprar</button>
                 </div>
             </div>
         </div>
@@ -968,7 +1617,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('FiveM', 'Diário')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('FiveM', 'Diário', '19.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Semanal</div>
@@ -980,7 +1629,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('FiveM', 'Semanal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('FiveM', 'Semanal', '99.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Mensal</div>
@@ -992,7 +1641,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('FiveM', 'Mensal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('FiveM', 'Mensal', '349.99')">Comprar</button>
                 </div>
             </div>
         </div>
@@ -1014,7 +1663,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Free Fire', 'Diário')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Free Fire', 'Diário', '8.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Semanal</div>
@@ -1026,7 +1675,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Free Fire', 'Semanal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Free Fire', 'Semanal', '39.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Mensal</div>
@@ -1038,7 +1687,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('Free Fire', 'Mensal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('Free Fire', 'Mensal', '129.99')">Comprar</button>
                 </div>
             </div>
         </div>
@@ -1060,7 +1709,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('HWID Spoofer', 'Diário')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('HWID Spoofer', 'Diário', '14.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Semanal</div>
@@ -1072,7 +1721,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('HWID Spoofer', 'Semanal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('HWID Spoofer', 'Semanal', '69.99')">Comprar</button>
                 </div>
                 <div class="pricing-card">
                     <div class="plan-name">Mensal</div>
@@ -1084,7 +1733,7 @@
                         <li>Suporte prioritário</li>
                         <li>Sem anúncios</li>
                     </ul>
-                    <button class="plan-btn" onclick="selectPlan('HWID Spoofer', 'Mensal')">Comprar</button>
+                    <button class="plan-btn" onclick="addToCart('HWID Spoofer', 'Mensal', '229.99')">Comprar</button>
                 </div>
             </div>
         </div>
@@ -1118,51 +1767,27 @@
 
         <div class="dashboard-section">
             <h2>Seus Produtos</h2>
-            <p id="productsList" style="color: #aaa;">Nenhum produto ativo no momento. <a href="#" onclick="showLanding(); return false;" style="color: #fff;">Explore agora</a></p>
+            <p id="productsList" style="color: #aaa; margin-bottom: 1rem;">Nenhum produto ativo no momento.</p>
+            <button onclick="scrollToProducts()" style="background: #fff; color: #000; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                <i class="fa-solid fa-shopping-bag"></i> Explorar Produtos
+            </button>
         </div>
 
         <div class="dashboard-section">
-            <h2>Informações Úteis</h2>
-            <ul style="list-style: none;">
-                <li style="padding: 0.5rem 0; color: #aaa;"><strong>Email:</strong> <span id="userEmail">user@phantom.com</span></li>
-                <li style="padding: 0.5rem 0; color: #aaa;"><strong>Membro Desde:</strong> <span id="memberSince">2024</span></li>
-                <li style="padding: 0.5rem 0; color: #aaa;"><strong>Suporte:</strong> support@phantom.com</li>
-            </ul>
-        </div>
-
-        <div class="dashboard-section">
-            <h2>Comunidade</h2>
-            <div style="background: linear-gradient(135deg, #0a1428 0%, #0d1b3a 100%); border: 2px solid #1e3a5f; border-radius: 8px; padding: 1.5rem; max-width: 350px;">
-                <!-- Discord Header -->
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                    <i class="fab fa-discord" style="color: #5865f2; font-size: 1.5rem;"></i>
-                    <h3 style="margin: 0; color: #5865f2; font-size: 1.2rem;">Discord</h3>
-                </div>
-
-                <!-- Username -->
-                <div style="margin-bottom: 1rem;">
-                    <p style="color: #ddd; font-weight: 600; margin-bottom: 0.5rem;">gusta9</p>
-                    <p style="color: #999; font-size: 0.9rem;">Desenvolvedor & Criador</p>
-                </div>
-
-                <!-- Insignias/Badges -->
-                <div style="margin-bottom: 1rem;">
-                    <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.5rem; text-transform: uppercase;">Insignias</p>
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <div style="background: #2c3e9f; border: 1px solid #5865f2; border-radius: 4px; padding: 0.5rem 0.8rem; font-size: 0.85rem; color: #5865f2; display: flex; align-items: center; gap: 0.3rem;">
-                            <i class="fas fa-code"></i> Developer
-                        </div>
-                        <div style="background: #663399; border: 1px solid #b366ff; border-radius: 4px; padding: 0.5rem 0.8rem; font-size: 0.85rem; color: #b366ff; display: flex; align-items: center; gap: 0.3rem;">
-                            <i class="fas fa-star"></i> Creator
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Discord Link Button -->
-                <button onclick="window.open('https://discord.com/users/YOUR_USER_ID', '_blank')" style="width: 100%; background: #5865f2; color: white; border: none; padding: 0.8rem; border-radius: 4px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; font-size: 0.95rem;">
-                    <i class="fab fa-discord" style="margin-right: 0.5rem;"></i> Visitar Perfil
-                </button>
+            <h2>📊 Histórico de Compras</h2>
+            <div id="purchaseHistory" style="max-height: 300px; overflow-y: auto;">
+                <p style="color: #aaa; text-align: center; padding: 1rem;">Nenhuma compra realizada ainda</p>
             </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Comunidade & Suporte</h2>
+            <button onclick="window.open('https://discord.com/users/1285045977614516284', '_blank')" style="width: 100%; background: #5865f2; color: white; border: none; padding: 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                <i class="fab fa-discord" style="font-size: 1.3rem;"></i> Conecte-se no Discord
+            </button>
+            <p style="color: #aaa; text-align: center; font-size: 0.9rem;">
+                Precisando de suporte? Entre em contato conosco pelo Discord!
+            </p>
         </div>
 
         <button class="logout-btn" onclick="logout()">Sair da Conta</button>
@@ -1172,21 +1797,269 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Login</h2>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required placeholder="seu@email.com">
+            
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">
+                    <i class="fa-solid fa-sign-in"></i> Entrar
+                </button>
+                <button class="auth-tab" onclick="switchAuthTab('register')">
+                    <i class="fa-solid fa-user-plus"></i> Criar Conta
+                </button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginTab" class="auth-tab-content active">
+                <h2 style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Login</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Senha</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="form-submit">Entrar</button>
+                </form>
+                <p style="margin-top: 1rem; text-align: center; color: #aaa; font-size: 0.9rem;">
+                    Esqueceu a senha? <a href="#" onclick="showForgotPassword(); return false;" style="color: #fff; cursor: pointer; text-decoration: underline;">Recuperar</a>
+                </p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerTab" class="auth-tab-content">
+                <h2 style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Criar Conta</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="register-name">Nome Completo</label>
+                        <input type="text" id="register-name" required placeholder="Seu Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Senha</label>
+                        <input type="password" id="register-password" required placeholder="Mínimo 6 caracteres" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-confirm">Confirmar Senha</label>
+                        <input type="password" id="register-confirm" required placeholder="Confirme a senha" minlength="6">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <input type="checkbox" id="register-terms" required>
+                        <label for="register-terms" style="margin: 0; cursor: pointer; font-size: 0.9rem; color: #aaa;">
+                            Concordo com os <a href="#" onclick="return false;" style="color: #fff; text-decoration: underline;">Termos de Serviço</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="form-submit">Criar Conta</button>
+                </form>
+                <p style="margin-top: 1rem; text-align: center; color: #aaa; font-size: 0.9rem;">
+                    Já tem conta? <a href="#" onclick="switchAuthTab('login'); return false;" style="color: #fff; cursor: pointer; text-decoration: underline;">Faça login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content contact-modal-content" style="max-width: 450px;">
+            <span class="close-btn" onclick="closeContactModal()">&times;</span>
+            
+            <div class="contact-header">
+                <div class="contact-icon">
+                    <i class="fas fa-headset"></i>
                 </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" required placeholder="••••••••">
+                <h2 class="contact-title">Entre em Contato</h2>
+                <p class="contact-subtitle">Estamos sempre prontos para ajudar você</p>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <div class="info-text">
+                        <span class="info-label">Discord</span>
+                        <span class="info-value">gusta9</span>
+                    </div>
                 </div>
-                <button type="submit" class="form-submit">Entrar</button>
-            </form>
-            <p style="margin-top: 1rem; text-align: center; color: #aaa; font-size: 0.9rem;">
-                Não tem conta? <a href="#" onclick="alert('Funcionalidade em desenvolvimento'); return false;" style="color: #fff; cursor: pointer;">Registre-se</a>
-            </p>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-text">
+                        <span class="info-label">Suporte</span>
+                        <span class="info-value">24/7 Disponível</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-buttons">
+                <button class="contact-btn-primary" onclick="window.open('https://discord.com/users/1285045977614516284', '_blank')">
+                    <i class="fab fa-discord"></i> Adicionar
+                </button>
+                <button class="contact-btn-secondary" onclick="window.open('https://discord.gg/phantom', '_blank')">
+                    <i class="fab fa-discord"></i> PHANTOM
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content cart-modal-content">
+            <span class="close-btn" onclick="closeCart()">&times;</span>
+            
+            <div class="cart-header">
+                <h2 class="cart-title">🛒 SEU CARRINHO</h2>
+                <p id="cartItemCount" style="color: #aaa;">0 itens</p>
+            </div>
+
+            <div id="cartItemsContainer" class="cart-items">
+                <div class="cart-empty">Seu carrinho está vazio</div>
+            </div>
+
+            <div id="cartSummary" class="cart-summary" style="display: none;">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">R$ 0,00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="cartTotal">R$ 0,00</span>
+                </div>
+            </div>
+
+            <div class="cart-actions">
+                <button class="cart-btn" onclick="openPixPayment()">
+                    <i class="fa-solid fa-qrcode"></i> PAGAR COM PIX
+                </button>
+                <button class="cart-btn-secondary" onclick="closeCart()">
+                    Continuar Comprando
+                </button>
+                <button class="cart-btn-secondary" style="background: #ff4444; color: #fff; border: none;" onclick="clearCart()">
+                    Limpar Carrinho
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIX Payment Modal -->
+    <div id="pixPaymentModal" class="modal">
+        <div class="modal-content" style="max-width: 550px; background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-radius: 15px; max-height: 90vh; overflow-y: auto;">
+            <span class="close-btn" onclick="closePixPayment()">&times;</span>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fa-solid fa-qrcode" style="font-size: 3rem; color: #fff; margin-bottom: 1rem;"></i>
+                <h2 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">PAGAMENTO PIX</h2>
+                <p style="color: #aaa;">Escaneie o QR Code ou copie a chave</p>
+            </div>
+
+            <!-- Total Amount -->
+            <div style="background: #0a0a0a; border: 2px solid #333; border-radius: 8px; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem;">
+                <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem;">TOTAL A PAGAR</p>
+                <p style="color: #fff; font-size: 2rem; font-weight: 900;" id="pixTotal">R$ 0,00</p>
+            </div>
+
+            <!-- QR Code -->
+            <div style="background: #fff; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; text-align: center;">
+                <img id="pixQrCode" src="" alt="QR Code PIX" style="max-width: 250px; width: 100%; height: auto; border-radius: 4px;">
+            </div>
+
+            <!-- PIX Key -->
+            <div style="margin-bottom: 1.5rem;">
+                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 0.5rem; text-transform: uppercase;">Ou copie a chave:</p>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="text" id="pixKey" readonly style="flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 4px; padding: 0.8rem; color: #fff; font-size: 0.9rem; font-family: monospace;">
+                    <button onclick="copyPixKey()" style="background: #fff; color: #000; border: none; padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-copy"></i> Copiar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div style="background: #0a0a0a; border-left: 3px solid #fff; border-radius: 4px; padding: 1rem; margin-bottom: 1.5rem;">
+                <p style="color: #fff; font-weight: 600; margin-bottom: 0.5rem;">Como pagar:</p>
+                <ol style="color: #aaa; margin-left: 1.5rem; line-height: 1.8;">
+                    <li>Abra seu banco ou app de pagamentos</li>
+                    <li>Escolha a opção PIX</li>
+                    <li>Escaneie o QR Code ou cole a chave</li>
+                    <li>Confirme a transação</li>
+                </ol>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 1rem; flex-direction: column;">
+                <button onclick="confirmPixPayment()" style="background: #fff; color: #000; border: none; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;">
+                    ✓ Confirmei o Pagamento
+                </button>
+                <button onclick="closePixPayment()" style="background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;">
+                    Cancelar
+                </button>
+            </div>
+
+            <!-- Payment Status -->
+            <div id="pixStatus" style="display: none; margin-top: 1.5rem; background: #0a0a0a; border-radius: 8px; padding: 1rem; text-align: center;">
+                <div style="animation: spin 2s linear infinite; display: inline-block; margin-bottom: 0.5rem;">
+                    <i class="fa-solid fa-spinner" style="font-size: 2rem; color: #fff;"></i>
+                </div>
+                <p style="color: #fff; font-weight: 600;">Aguardando confirmação de pagamento...</p>
+                <p style="color: #aaa; font-size: 0.85rem; margin-top: 0.5rem;">Pode levar alguns minutos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activation Key Modal -->
+    <div id="activationKeyModal" class="modal">
+        <div class="modal-content" style="max-width: 550px; background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border-radius: 15px; max-height: 90vh; overflow-y: auto;">
+            <span class="close-btn" onclick="closeActivationModal()">&times;</span>
+            
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fab fa-discord" style="font-size: 3rem; color: #fff; margin-bottom: 1rem;"></i>
+                <h2 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">✓ PAGAMENTO CONFIRMADO</h2>
+                <p style="color: #ccc;">Seu pedido foi recebido com sucesso!</p>
+            </div>
+
+            <!-- Order Summary -->
+            <div id="orderSummary" style="background: #0a0a0a; border: 1px solid #333; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; max-height: 200px; overflow-y: auto;">
+            </div>
+
+            <!-- Discord Instructions -->
+            <div style="background: #1a1a1a; border: 1px solid #555; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                <h3 style="color: #fff; margin-top: 0; margin-bottom: 1rem;">🎟️ Próximo Passo:</h3>
+                <p style="color: #ccc; margin-bottom: 1rem; line-height: 1.8;">
+                    Você receberá seu produto via Discord. Clique no botão abaixo para entrar no nosso servidor e abrir um <strong>ticket de suporte</strong> para receber seu acesso.
+                </p>
+                <p style="color: #ccc; font-size: 0.9rem; margin: 0;">
+                    <i class="fa-solid fa-circle-check"></i> Nossos moderadores responderão em minutos!
+                </p>
+            </div>
+
+            <!-- Important Info -->
+            <div style="background: #0a0a0a; border-left: 3px solid #999; border-radius: 4px; padding: 1rem; margin-bottom: 1.5rem;">
+                <p style="color: #fff; font-weight: 600; margin-bottom: 0.5rem;">💡 Informações:</p>
+                <ul style="color: #bbb; margin-left: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+                    <li>Mantenha a aba do Discord aberta</li>
+                    <li>Clique em "Abrir Ticket" ao entrar</li>
+                    <li>Descreva qual produto você comprou</li>
+                    <li>Você receberá seu acesso em minutos!</li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 1rem; flex-direction: column;">
+                <button onclick="openDiscordServer()" style="background: #fff; color: #000; border: none; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <i class="fab fa-discord"></i> Entrar no Discord PHANTOM
+                </button>
+                <button onclick="downloadReceipt()" style="background: transparent; color: #fff; border: 2px solid #fff; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;">
+                    <i class="fa-solid fa-download"></i> Baixar Comprovante
+                </button>
+                <button onclick="goToDashboard()" style="background: #333; color: #fff; border: 2px solid #555; padding: 1rem; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.3s ease;">
+                    Ir para Dashboard
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1217,6 +2090,36 @@
             document.getElementById('loginModal').style.display = 'none';
         }
 
+        function showContactModal() {
+            document.getElementById('contactModal').style.display = 'block';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').style.display = 'none';
+        }
+
+        function toggleDashboard() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                const dashboard = document.getElementById('dashboard');
+                const isVisible = dashboard.style.display === 'block';
+                
+                if (isVisible) {
+                    // Fechar dashboard e voltar aos produtos
+                    document.getElementById('dashboard').style.display = 'none';
+                    document.getElementById('products').style.display = 'block';
+                } else {
+                    // Abrir dashboard
+                    document.getElementById('landing').style.display = 'none';
+                    document.getElementById('products').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    updateDashboard();
+                }
+                window.scrollTo(0, 0);
+            } else {
+                showLogin();
+            }
+        }
+
         // Navigation Functions
         function showLanding() {
             document.getElementById('landing').style.display = 'flex';
@@ -1234,39 +2137,162 @@
             document.getElementById('footer').scrollIntoView({ behavior: 'smooth' });
         }
 
+        // ========== AUTH FUNCTIONS ==========
+        
+        // Switch between login and register tabs
+        function switchAuthTab(tab) {
+            // Hide all tabs
+            document.getElementById('loginTab').classList.remove('active');
+            document.getElementById('registerTab').classList.remove('active');
+            
+            // Remove active class from buttons
+            document.querySelectorAll('.auth-tab').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            if (tab === 'login') {
+                document.getElementById('loginTab').classList.add('active');
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+            } else {
+                document.getElementById('registerTab').classList.add('active');
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+            }
+        }
+
         // Login Handler
         function handleLogin(event) {
             event.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
 
             if (email && password) {
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userName', email.split('@')[0]);
+                // Verificar se a conta existe
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.email === email && u.password === password);
 
-                document.getElementById('landing').style.display = 'none';
-                document.getElementById('products').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                
-                updateDashboard();
-                closeModal();
-                
-                showNotification('Login realizado com sucesso!');
-                window.scrollTo(0, 0);
+                if (user) {
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userName', user.name);
+
+                    document.getElementById('landing').style.display = 'none';
+                    document.getElementById('products').style.display = 'block';
+                    document.getElementById('dashboard').style.display = 'none';
+                    
+                    updateDashboard();
+                    updateSidebarUser();
+                    closeModal();
+                    
+                    showNotification('✓ Login realizado com sucesso!');
+                    window.scrollTo(0, 0);
+                } else {
+                    showNotification('❌ Email ou senha incorretos!');
+                }
             }
+        }
+
+        // Register Handler
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showNotification('❌ As senhas não correspondem!');
+                return;
+            }
+
+            if (password.length < 6) {
+                showNotification('❌ A senha deve ter no mínimo 6 caracteres!');
+                return;
+            }
+
+            // Verificar se o email já existe
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.email === email)) {
+                showNotification('❌ Este email já está cadastrado!');
+                return;
+            }
+
+            // Salvar novo usuário
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                password: password,
+                createdAt: new Date().toLocaleString('pt-BR')
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Fazer login automaticamente
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', name);
+
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('products').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            
+            updateDashboard();
+            updateSidebarUser();
+            closeModal();
+            
+            showNotification('✓ Conta criada e login realizado com sucesso!');
+            window.scrollTo(0, 0);
+        }
+
+        // Forgot Password
+        function showForgotPassword() {
+            showNotification('📧 Funcionalidade em desenvolvimento. Entre em contato conosco!');
         }
 
         // Update Dashboard
         function updateDashboard() {
             const userName = localStorage.getItem('userName') || 'Usuário';
-            const userEmail = localStorage.getItem('userEmail') || 'user@phantom.com';
-            const selectedPlan = localStorage.getItem('selectedPlan') || 'Premium';
-
+            
             document.getElementById('userDisplayName').textContent = userName;
-            document.getElementById('userEmail').textContent = userEmail;
-            document.getElementById('currentPlan').textContent = selectedPlan;
             document.getElementById('memberSince').textContent = new Date().getFullYear();
+
+            // Update purchase history section
+            const history = JSON.parse(localStorage.getItem('purchaseHistory') || '[]');
+            const historyContainer = document.getElementById('purchaseHistory');
+            
+            if (!historyContainer) return;
+
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p style="color: #aaa; text-align: center; padding: 1rem;">Nenhuma compra realizada ainda</p>';
+                return;
+            }
+
+            let html = '';
+            history.slice(-5).reverse().forEach(purchase => {
+                const itemsList = purchase.items.map(item => `${item.game} (${item.plan})`).join(', ');
+                html += `
+                    <div style="background: #0a0a0a; border-left: 3px solid #fff; padding: 0.8rem; margin-bottom: 0.8rem; border-radius: 4px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                            <span style="color: #fff; font-weight: 600;">${itemsList}</span>
+                            <span style="color: #aaa; font-size: 0.85rem;">${purchase.date}</span>
+                        </div>
+                        <div style="color: #fff; font-weight: 700; font-size: 1.1rem;">
+                            R$ ${purchase.total.toFixed(2).replace('.', ',')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            historyContainer.innerHTML = html;
+
+            // Update plan info
+            const currentPlan = history.length > 0 ? history[history.length - 1].items[0].game : 'Nenhum';
+            document.getElementById('currentPlan').textContent = currentPlan;
+            
+            // Update days remaining
+            const daysRemaining = history.length > 0 ? 30 : 0;
+            document.getElementById('daysRemaining').textContent = daysRemaining;
         }
 
         // Plan Selection
@@ -1286,6 +2312,7 @@
         // Logout
         function logout() {
             localStorage.clear();
+            updateSidebarUser();
             showLanding();
             showNotification('Desconectado com sucesso!');
         }
@@ -1301,16 +2328,448 @@
             }, 3000);
         }
 
+        // ========== CART FUNCTIONS ==========
+        
+        let cart = [];
+
+        // Load cart from localStorage
+        function loadCart() {
+            const saved = localStorage.getItem('phantomCart');
+            cart = saved ? JSON.parse(saved) : [];
+            updateCartDisplay();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('phantomCart', JSON.stringify(cart));
+            updateCartBadge();
+        }
+
+        // Open cart modal
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+            updateCartDisplay();
+        }
+
+        // Close cart modal
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // Add item to cart
+        function addToCart(game, plan, price) {
+            const item = {
+                id: Date.now() + Math.random(),
+                game: game,
+                plan: plan,
+                price: parseFloat(price),
+                quantity: 1
+            };
+
+            // Check if same product already in cart
+            const existing = cart.find(p => p.game === game && p.plan === plan);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push(item);
+            }
+
+            saveCart();
+            updateCartDisplay();
+            showNotification(`✓ ${game} (${plan}) adicionado ao carrinho!`);
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveCart();
+            updateCartDisplay();
+            showNotification('Produto removido do carrinho');
+        }
+
+        // Clear entire cart
+        function clearCart() {
+            if (cart.length === 0) {
+                showNotification('Carrinho já está vazio');
+                return;
+            }
+            if (confirm('Tem certeza que deseja limpar o carrinho?')) {
+                cart = [];
+                saveCart();
+                updateCartDisplay();
+                showNotification('Carrinho limpo');
+            }
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const container = document.getElementById('cartItemsContainer');
+            const summary = document.getElementById('cartSummary');
+            const countElement = document.getElementById('cartItemCount');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="cart-empty">Seu carrinho está vazio</div>';
+                summary.style.display = 'none';
+                countElement.textContent = '0 itens';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.game}</div>
+                            <div class="cart-item-plan">${item.plan}</div>
+                            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <div style="text-align: right;">
+                                <div style="color: #aaa; font-size: 0.85rem;">Qtd: ${item.quantity}</div>
+                                <div style="color: #fff; font-weight: 600;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</div>
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            
+            const totalText = cart.length === 1 ? '1 item' : `${cart.length} itens`;
+            countElement.textContent = totalText;
+
+            document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            document.getElementById('cartTotal').textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            summary.style.display = 'block';
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.querySelector('.cart-badge');
+            const sidebarBadge = document.getElementById('sidebarCartBadge');
+            
+            if (badge) {
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+            
+            if (sidebarBadge) {
+                sidebarBadge.textContent = totalItems;
+                sidebarBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // ========== SIDEBAR FUNCTIONS ==========
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function updateSidebarUser() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userSection = document.getElementById('sidebarUserSection');
+            const loginSection = document.getElementById('sidebarLoginSection');
+            
+            if (isLoggedIn) {
+                userSection.style.display = 'block';
+                loginSection.style.display = 'none';
+                
+                const userName = localStorage.getItem('userName') || 'Usuário';
+                
+                document.getElementById('sidebarUserName').textContent = userName;
+            } else {
+                userSection.style.display = 'none';
+                loginSection.style.display = 'block';
+            }
+        }
+
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Adicione produtos ao carrinho primeiro');
+                return;
+            }
+            openPixPayment();
+        }
+
+        // ========== PIX PAYMENT FUNCTIONS ==========
+        
+        // PIX Configuration (adicione sua chave e QR code aqui)
+        const PIX_CONFIG = {
+            pixKey: 'phantomservicespix@gmail.com', // Chave PIX (email, CPF, telefone ou aleatória)
+            pixQrCode: 'https://cdn.discordapp.com/attachments/1281981010497638431/1463534163281055868/qrcode-pix.png?ex=69722de7&is=6970dc67&hm=23534a5628fef00647ef19cd811ae83e249de896b1157fc60d37b3693671a422&'
+        };
+
+        // Generate activation key
+        function generateActivationKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let key = '';
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    key += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                if (i < 3) key += '-';
+            }
+            return key;
+        }
+
+        // Open PIX payment modal
+        function openPixPayment() {
+            if (cart.length === 0) {
+                showNotification('Carrinho vazio');
+                return;
+            }
+
+            // Verificar se o usuário está logado
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                showNotification('⚠️ Você precisa estar logado para comprar!');
+                closeCart();
+                showLogin();
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            document.getElementById('pixTotal').textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+            document.getElementById('pixKey').value = PIX_CONFIG.pixKey;
+            document.getElementById('pixQrCode').src = PIX_CONFIG.pixQrCode;
+            document.getElementById('pixStatus').style.display = 'none';
+            
+            document.getElementById('pixPaymentModal').style.display = 'block';
+            closeCart();
+        }
+
+        // Close PIX payment modal
+        function closePixPayment() {
+            document.getElementById('pixPaymentModal').style.display = 'none';
+        }
+
+        // Copy PIX key to clipboard
+        function copyPixKey() {
+            const pixKey = document.getElementById('pixKey');
+            pixKey.select();
+            document.execCommand('copy');
+            showNotification('✓ Chave PIX copiada!');
+        }
+
+        // Confirm PIX payment
+        function confirmPixPayment() {
+            document.getElementById('pixStatus').style.display = 'block';
+            
+            // Simulate payment confirmation (em produção, você integraria com a API do Mercado Pago)
+            setTimeout(() => {
+                processPixPayment();
+            }, 3000);
+        }
+
+        // Process PIX payment
+        function processPixPayment() {
+            if (cart.length === 0) return;
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const activationKey = generateActivationKey();
+            
+            // Create purchase record
+            const purchase = {
+                id: Date.now(),
+                date: new Date().toLocaleString('pt-BR'),
+                items: [...cart],
+                total: total,
+                activationKey: activationKey,
+                status: 'Pago'
+            };
+
+            // Save to purchase history
+            let history = JSON.parse(localStorage.getItem('purchaseHistory') || '[]');
+            history.push(purchase);
+            localStorage.setItem('purchaseHistory', JSON.stringify(history));
+
+            // Clear cart
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+
+            // Show activation key modal
+            closePixPayment();
+            showActivationKeyModal(purchase);
+        }
+
+        // Show activation key modal
+        function showActivationKeyModal(purchase) {
+            // Store purchase for later use in downloadReceipt
+            window.currentPurchase = purchase;
+            
+            // Show order summary
+            let summaryHtml = '';
+            purchase.items.forEach(item => {
+                summaryHtml += `
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #333;">
+                        <span style="color: #fff;">
+                            <strong>${item.game}</strong> (${item.plan})
+                        </span>
+                        <span style="color: #aaa;">
+                            R$ ${item.price.toFixed(2).replace('.', ',')}
+                        </span>
+                    </div>
+                `;
+            });
+            summaryHtml += `
+                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 2px solid #fff;">
+                    <span style="color: #fff; font-weight: 700;">TOTAL</span>
+                    <span style="color: #fff; font-weight: 700; font-size: 1.1rem;">R$ ${purchase.total.toFixed(2).replace('.', ',')}</span>
+                </div>
+            `;
+            
+            document.getElementById('orderSummary').innerHTML = summaryHtml;
+            document.getElementById('activationKeyModal').style.display = 'block';
+            
+            showNotification('✓ Pagamento confirmado! Você será redirecionado para o Discord.');
+        }
+
+        // Open Discord Server
+        function openDiscordServer() {
+            // Open Discord profile/server
+            // You can modify this to your Discord server invite link
+            window.open('https://discord.com/users/1285045977614516284', '_blank');
+            showNotification('✓ Discord aberto! Abra um ticket para receber seu produto.');
+        }
+
+        // Close activation modal
+        function closeActivationModal() {
+            document.getElementById('activationKeyModal').style.display = 'none';
+        }
+
+        // Download receipt
+        function downloadReceipt() {
+            const purchase = window.currentPurchase || {};
+            const itemsText = purchase.items ? purchase.items.map(item => 
+                `${item.game} (${item.plan}) - R$ ${item.price.toFixed(2).replace('.', ',')}`
+            ).join('\n') : 'Nenhum item';
+            
+            const receipt = `
+PHANTOM - Gaming Solutions
+=====================================
+COMPROVANTE DE PAGAMENTO
+
+Data: ${new Date().toLocaleString('pt-BR')}
+Status: PAGO ✓
+
+ITENS ADQUIRIDOS:
+${itemsText}
+
+Total Pago: R$ ${purchase.total ? purchase.total.toFixed(2).replace('.', ',') : '0,00'}
+
+=====================================
+COMO RECEBER SEU PRODUTO:
+
+1. Clique no botão "Entrar no Discord PHANTOM"
+2. Entre no servidor Discord
+3. Abra um ticket de suporte
+4. Nossos moderadores irão enviar seu acesso em minutos
+
+Suporte: Abra um ticket no Discord
+Discord: PHANTOM Gaming Solutions
+Email: support@phantom.com
+            `;
+            
+            const blob = new Blob([receipt], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `comprovante-${Date.now()}.txt`;
+            a.click();
+            showNotification('✓ Comprovante baixado!');
+        }
+
+        // Go to dashboard
+        function goToDashboard() {
+            closeActivationModal();
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                showLanding();
+                setTimeout(() => toggleDashboard(), 100);
+                updateDashboard();
+            } else {
+                showNotification('Faça login para acessar o dashboard');
+                showLogin();
+            }
+        }
+
+        // Simulate purchase
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Adicione produtos ao carrinho primeiro');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Simulate purchase
+            const purchase = {
+                date: new Date().toLocaleString('pt-BR'),
+                items: cart,
+                total: total
+            };
+
+            // Save to purchase history
+            let history = JSON.parse(localStorage.getItem('purchaseHistory') || '[]');
+            history.push(purchase);
+            localStorage.setItem('purchaseHistory', JSON.stringify(history));
+
+            // Clear cart
+            cart = [];
+            saveCart();
+            updateCartDisplay();
+            closeCart();
+
+            showNotification(`✓ Compra realizada! Total: R$ ${total.toFixed(2).replace('.', ',')}`);
+
+            // Update dashboard if logged in
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                updateDashboard();
+            }
+        }
+
         // Close Modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('loginModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
+            const loginModal = document.getElementById('loginModal');
+            const contactModal = document.getElementById('contactModal');
+            const cartModal = document.getElementById('cartModal');
+            const pixPaymentModal = document.getElementById('pixPaymentModal');
+            const activationKeyModal = document.getElementById('activationKeyModal');
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (event.target === contactModal) {
+                contactModal.style.display = 'none';
+            }
+            if (event.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+            if (event.target === pixPaymentModal) {
+                pixPaymentModal.style.display = 'none';
+            }
+            if (event.target === activationKeyModal) {
+                activationKeyModal.style.display = 'none';
             }
         }
 
         // Check login state on load
         window.addEventListener('load', function() {
+            loadCart();
+            updateSidebarUser();
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 document.getElementById('landing').style.display = 'none';
                 document.getElementById('products').style.display = 'none';
