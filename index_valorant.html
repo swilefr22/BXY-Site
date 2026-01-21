@@ -1,0 +1,3224 @@
+            <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BXY Softwares - Control Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%,          #1a1a1a 50%, #101010 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           LANDING PAGE / SITE DE VENDAS
+           ============================================ */
+        
+        .landing-page {
+            display: block;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .landing-page.hidden {
+            display: none;
+        }
+
+        /* Header/Navigation */
+        .landing-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .landing-logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .landing-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .landing-nav a {
+            color: #999;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .landing-nav a:hover {
+            color: #fff;
+        }
+
+        .btn-dashboard {
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            padding: 10px 25px;
+            border-radius: 8px;
+            color: #fff !important;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-dashboard:hover {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(80, 80, 80, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 150px 50px 100px;
+            text-align: center;
+            background: radial-gradient(ellipse at top, rgba(50, 50, 50, 0.3), transparent);
+        }
+
+        .hero-title {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3em;
+            color: #999;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            padding: 15px 40px;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(80, 80, 80, 0.5);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 50px;
+            background: rgba(15, 15, 15, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(25, 25, 25, 0.8);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .feature-description {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 50px;
+            background: rgba(10, 10, 10, 0.3);
+        }
+
+        .product-group {
+            margin-bottom: 70px;
+        }
+
+        .product-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-header h3 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .product-header p {
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(25, 25, 25, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a4a4a, #6a6a6a);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(100, 100, 100, 0.3);
+        }
+
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border-color: rgba(180, 180, 180, 0.4);
+        }
+
+        .pricing-card.popular:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .pricing-price {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #fff;
+        }
+
+        .pricing-price small {
+            font-size: 0.4em;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: #4a4a4a;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-pricing:hover {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(80, 80, 80, 0.4);
+        }
+
+        /* Payment Methods */
+        .payment-section {
+            padding: 60px 50px;
+            background: rgba(15, 15, 15, 0.5);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: rgba(25, 25, 25, 0.8);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        /* Game Selector */
+        .game-selector {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+        }
+
+        .game-selector.active {
+            display: flex;
+        }
+
+        .game-selector-container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .game-selector-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .game-selector-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-selector-header p {
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .game-card {
+            background: rgba(25, 25, 25, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4a4a4a, #6a6a6a);
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(100, 100, 100, 0.3);
+        }
+
+        .game-card.selected {
+            border-color: rgba(180, 180, 180, 0.6);
+            background: rgba(35, 35, 35, 0.9);
+        }
+
+        .game-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .game-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .game-description {
+            color: #999;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .game-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .game-features li {
+            padding: 8px 0;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        .game-features li::before {
+            content: '✓';
+            color: #4a4a4a;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .game-selector-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-login {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .back-to-login:hover {
+            color: #fff;
+        }
+
+        /* Footer */
+        .landing-footer {
+            padding: 40px 50px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .landing-header {
+                padding: 15px 20px;
+            }
+
+            .hero-title {
+                font-size: 2.5em;
+            }
+
+            .hero-section {
+                padding: 120px 20px 60px;
+            }
+
+            .features-section,
+            .pricing-section,
+            .payment-section {
+                padding: 60px 20px;
+            }
+
+            .landing-nav {
+                display: none;
+            }
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 40px;
+            animation: fadeIn 0.6s ease;
+            display: none;
+        }
+
+        .login-container.active {
+            display: block;
+        }
+
+        .login-box {
+            background: rgba(25, 25, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .login-container.hidden {
+            animation: fadeOut 0.4s ease;
+            opacity: 0;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container h1 {
+            font-size: 2em;
+            margin: 15px 0 5px 0;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .logo-container p {
+            margin: 0;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #999;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a1a1a;
+            border: 2px solid #2a2a2a;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #6a6a6a;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(80, 80, 80, 0.4);
+        }
+
+        .login-error {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            color: #ff6b6b;
+            text-align: center;
+            display: none;
+        }
+
+        .login-error.show {
+            display: block;
+        }
+
+        .main-content {
+            display: none;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .main-content.active {
+            display: block;
+        }
+
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(25, 25, 25, 0.95);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 100;
+            min-width: 250px;
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .user-product {
+            color: #888;
+            font-size: 0.75em;
+        }
+
+        .user-subscription {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(15, 15, 15, 0.6);
+            border-radius: 6px;
+            margin-top: 5px;
+        }
+
+        .days-remaining {
+            color: #4caf50;
+            font-weight: 600;
+            font-size: 0.85em;
+        }
+
+        .expiration-date {
+            color: #999;
+            font-size: 0.75em;
+        }
+
+        .logout-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+            color: #ff8888;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #999;
+            font-size: 1em;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .status.offline {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .status.remote {
+            background: rgba(33, 150, 243, 0.2);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4caf50;
+            box-shadow: 0 0 8px #4caf50;
+        }
+
+        .status.offline .status-dot {
+            background: #f44336;
+            box-shadow: 0 0 8px #f44336;
+        }
+
+        .status.remote .status-dot {
+            background: #2196f3;
+            box-shadow: 0 0 8px #2196f3;
+        }
+
+        .card {
+            background: rgba(25, 25, 25, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .card h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .card h3 {
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            border-radius: 12px;
+            font-size: 0.7em;
+            margin-left: 10px;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 10px rgba(50, 50, 50, 0.3);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(80, 80, 80, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #6a6a6a, #5a5a5a);
+            box-shadow: 0 10px 25px rgba(90, 90, 90, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+            box-shadow: 0 10px 25px rgba(60, 60, 60, 0.4);
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0;
+            padding: 15px 18px;
+            background: rgba(15, 15, 15, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .toggle-container:hover {
+            background: rgba(25, 25, 25, 0.6);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-label {
+            font-size: 1em;
+            color: #d0d0d0;
+            font-weight: 500;
+        }
+
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #2a2a2a;
+            transition: all 0.4s;
+            border-radius: 30px;
+            border: 2px solid #3a3a3a;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 2px;
+            background: linear-gradient(135deg, #666, #555);
+            transition: all 0.4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            border-color: #6a6a6a;
+            box-shadow: 0 0 15px rgba(80, 80, 80, 0.4);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            box-shadow: 0 2px 12px rgba(255, 255, 255, 0.5);
+        }
+
+        .select-container {
+            margin-bottom: 15px;
+        }
+
+        .select-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #b0b0b0;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .select-container select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(15, 15, 15, 0.8);
+            border: 2px solid #3a3a3a;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .select-container select:hover {
+            background: rgba(25, 25, 25, 0.9);
+            border-color: #4a4a4a;
+        }
+
+        .select-container select:focus {
+            border-color: #6a6a6a;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.3);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: rgba(80, 80, 80, 0.95);
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.4s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: rgba(60, 60, 60, 0.95);
+        }
+
+        .notification.success {
+            background: rgba(90, 90, 90, 0.95);
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .color-picker-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .color-option.selected {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .color-red { background: #ff4444; }
+        .color-blue { background: #4444ff; }
+        .color-green { background: #44ff44; }
+        .color-yellow { background: #ffff44; }
+        .color-purple { background: #ff44ff; }
+        .color-cyan { background: #44ffff; }
+        .color-orange { background: #ff8844; }
+        .color-white { background: #ffffff; }
+
+        /* Discord Section Styles */
+        .discord-section {
+            padding: 80px 50px;
+            background: linear-gradient(135deg, rgba(80, 80, 80, 0.1), rgba(80, 80, 80, 0.05));
+            border-top: 2px solid rgba(80, 80, 80, 0.3);
+            border-bottom: 2px solid rgba(80, 80, 80, 0.3);
+        }
+
+        .discord-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .discord-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .discord-header h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #6a6a6a, #4a4a4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .discord-header p {
+            color: #999;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .discord-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .discord-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .discord-info h3 {
+            font-size: 1.8em;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .discord-info p {
+            color: #999;
+            line-height: 1.8;
+            font-size: 1em;
+        }
+
+        .discord-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-discord {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(80, 80, 80, 0.4);
+            background: linear-gradient(135deg, #4a4a4a, #5a5a5a);
+        }
+
+        .discord-profile {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .discord-card {
+            background: rgba(25, 25, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(80, 80, 80, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .discord-card:hover {
+            border-color: rgba(80, 80, 80, 0.6);
+            box-shadow: 0 10px 40px rgba(80, 80, 80, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .discord-card-banner {
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            height: 80px;
+            border-radius: 12px 12px 0 0;
+            margin: -30px -30px 20px -30px;
+        }
+
+        .discord-card-header {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .discord-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #5a5a5a, #4a4a4a);
+            border-radius: 50%;
+            border: 4px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin-top: -40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .discord-user-info {
+            flex: 1;
+        }
+
+        .discord-username {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discord-tag {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .discord-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(100, 100, 100, 0.2);
+            border: 1px solid rgba(100, 100, 100, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            color: #aaa;
+            font-weight: 600;
+        }
+
+        .discord-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(80, 80, 80, 0.1);
+            border-radius: 8px;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #43B581;
+            box-shadow: 0 0 10px #43B581;
+        }
+
+        .status-indicator.idle {
+            background: #FAA61A;
+            box-shadow: 0 0 10px #FAA61A;
+        }
+
+        .status-indicator.dnd {
+            background: #F04747;
+            box-shadow: 0 0 10px #F04747;
+        }
+
+        .discord-status-text {
+            color: #ccc;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .discord-about {
+            padding: 15px;
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 10px;
+            border-left: 3px solid #6a6a6a;
+            color: #ddd;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .discord-section {
+                padding: 60px 20px;
+            }
+
+            .discord-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .discord-buttons {
+                flex-direction: column;
+            }
+
+            .btn-discord {
+                flex: none;
+                width: 100%;
+            }
+
+            .discord-header h2 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         LANDING PAGE / SITE DE VENDAS
+         ============================================ -->
+    <div id="landingPage" class="landing-page">
+        <!-- Header/Navigation -->
+        <header class="landing-header">
+            <div class="landing-logo">
+               👩‍💻 BXY Softwares
+            </div>
+            <nav class="landing-nav">
+                <a href="#features">Recursos</a>
+                <a href="#pricing">Planos</a>
+                <a href="#payment">Pagamento</a>
+                <a href="#discord">Discord</a>
+                <a href="#" class="btn-dashboard" onclick="showLogin(event)">
+                    Acessar Dashboard
+                </a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">BXY Softwares</h1>
+            <p class="hero-subtitle">
+                O melhor sistema de controle remoto para Free Fire, Valorant, CS2, FiveM e mais. 
+                Aimbot, ESP, Chams e muito mais. Tudo em um painel web moderno e seguro.
+            </p>
+            <div class="hero-cta">
+                <a href="#pricing" class="btn-primary">Ver Planos</a>
+                <a href="#" class="btn-primary" onclick="showLogin(event)">Acessar Dashboard</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <h2 class="section-title">Recursos Exclusivos</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Aimbot Avançado</div>
+                    <div class="feature-description">Com aim color customizável para todos os jogos</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <div class="feature-title">ESP/Wallhack</div>
+                    <div class="feature-description">Visualize todos os inimigos através de paredes</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Antidetecção</div>
+                    <div class="feature-description">Bypass avançado contra anticheat</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Desempenho</div>
+                    <div class="feature-description">Sem lag, rápido e otimizado</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <div class="feature-title">Multi-Jogo</div>
+                    <div class="feature-description">Suporte para vários jogos</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">Web Panel</div>
+                    <div class="feature-description">Controle remoto pelo navegador</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing-section">
+            
+            <!-- BXY Free Fire -->
+            <div class="product-group">
+                <div class="product-header">
+                    <h3>🔥 BXY Free Fire</h3>
+                    <p>Cheats completos para Free Fire</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Popular</span>
+                        <div class="pricing-name">1 Dia</div>
+                        <div class="pricing-price">R$ 15<small>/dia</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card popular">
+                        <span class="pricing-badge">Melhor Oferta</span>
+                        <div class="pricing-name">7 Dias</div>
+                        <div class="pricing-price">R$ 80<small>/semana</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Economia</span>
+                        <div class="pricing-name">30 Dias</div>
+                        <div class="pricing-price">R$ 250<small>/mês</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                            <li>Renovação com desconto</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BXY Valorant -->
+            <div class="product-group">
+                <div class="product-header">
+                    <h3>🎯 BXY Valorant</h3>
+                    <p>Aimbot com colors avançados para Valorant</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Popular</span>
+                        <div class="pricing-name">1 Dia</div>
+                        <div class="pricing-price">R$ 29<small>/dia</small></div>
+                        <ul class="pricing-features">
+                            <li>Aim Color Customizável</li>
+                            <li>Legit Mode</li>
+                            <li>Rage Mode</li>
+                            <li>Suporte 24/7</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card popular">
+                        <span class="pricing-badge">Melhor Oferta</span>
+                        <div class="pricing-name">7 Dias</div>
+                        <div class="pricing-price">R$ 55<small>/semana</small></div>
+                        <ul class="pricing-features">
+                            <li>Aim Color Customizável</li>
+                            <li>Legit Mode</li>
+                            <li>Rage Mode</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                            <li>Preset Colors</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Economia</span>
+                        <div class="pricing-name">30 Dias</div>
+                        <div class="pricing-price">R$ 137<small>/mês</small></div>
+                        <ul class="pricing-features">
+                            <li>Aim Color Customizável</li>
+                            <li>Legit Mode</li>
+                            <li>Rage Mode</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                            <li>Preset Colors</li>
+                            <li>Renovação com desconto</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BXY CS2 -->
+            <div class="product-group">
+                <div class="product-header">
+                    <h3>🎮 BXY CS2</h3>
+                    <p>Cheats completos para Counter-Strike 2</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Popular</span>
+                        <div class="pricing-name">1 Dia</div>
+                        <div class="pricing-price">R$ 18<small>/dia</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card popular">
+                        <span class="pricing-badge">Melhor Oferta</span>
+                        <div class="pricing-name">7 Dias</div>
+                        <div class="pricing-price">R$ 100<small>/semana</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Economia</span>
+                        <div class="pricing-name">30 Dias</div>
+                        <div class="pricing-price">R$ 300<small>/mês</small></div>
+                        <ul class="pricing-features">
+                            <li>Legit Aimbot</li>
+                            <li>Rage Aimbot</li>
+                            <li>Chams/Wallhack</li>
+                            <li>Suporte 24/7</li>
+                            <li>Updates Grátis</li>
+                            <li>Renovação com desconto</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BXY FiveM -->
+            <div class="product-group">
+                <div class="product-header">
+                    <h3>🚗 BXY FiveM</h3>
+                    <p>Mods completos para FiveM/GTA</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Popular</span>
+                        <div class="pricing-name">1 Dia</div>
+                        <div class="pricing-price">R$ 12<small>/dia</small></div>
+                        <ul class="pricing-features">
+                            <li>ESP System</li>
+                            <li>Teleport</li>
+                            <li>God Mode</li>
+                            <li>Suporte 24/7</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card popular">
+                        <span class="pricing-badge">Melhor Oferta</span>
+                        <div class="pricing-name">7 Dias</div>
+                        <div class="pricing-price">R$ 70<small>/semana</small></div>
+                        <ul class="pricing-features">
+                            <li>ESP System</li>
+                            <li>Teleport</li>
+                            <li>God Mode</li>
+                            <li>Vehicle Mods</li>
+                            <li>Suporte 24/7</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <span class="pricing-badge">Economia</span>
+                        <div class="pricing-name">30 Dias</div>
+                        <div class="pricing-price">R$ 220<small>/mês</small></div>
+                        <ul class="pricing-features">
+                            <li>ESP System</li>
+                            <li>Teleport</li>
+                            <li>God Mode</li>
+                            <li>Vehicle Mods</li>
+                            <li>Suporte 24/7</li>
+                            <li>Renovação com desconto</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BXY Spoofer -->
+            <div class="product-group">
+                <div class="product-header">
+                    <h3>🔐 BXY Spoofer</h3>
+                    <p>Mascare seu HWID contra anticheat</p>
+                </div>
+                <div class="pricing-grid" style="max-width: 600px;">
+                    <div class="pricing-card popular">
+                        <span class="pricing-badge">Spoofer Lifelong</span>
+                        <div class="pricing-name">Permanente</div>
+                        <div class="pricing-price">R$ 150<small>/lifetime</small></div>
+                        <ul class="pricing-features">
+                            <li>HWID Spoof</li>
+                            <li>Mac Address Spoof</li>
+                            <li>Atualizações Grátis</li>
+                            <li>Suporte Vitalício</li>
+                        </ul>
+                        <button class="btn-pricing" onclick="openDiscord()">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods -->
+        <section id="payment" class="payment-section">
+            <h2 class="section-title">Formas de Pagamento</h2>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <i class="fas fa-money-bill-wave"></i>
+                    PIX
+                </div>
+                <div class="payment-method">
+                    <i class="fas fa-credit-card"></i>
+                    Cartão de Crédito
+                </div>
+                <div class="payment-method">
+                    <i class="fab fa-paypal"></i>
+                    PayPal
+                </div>
+            </div>
+        </section>
+
+        <!-- Discord Section -->
+        <section id="discord" class="discord-section">
+            <div class="discord-container">
+                <div class="discord-header">
+                    <h2>💜 Junte-se ao nosso Discord</h2>
+                    <p>Tenha acesso a suporte 24/7, dicas exclusivas e uma comunidade incrível</p>
+                </div>
+
+                <div class="discord-content">
+                    <div class="discord-info">
+                        <h3>Por que se juntar?</h3>
+                        <p>✅ Suporte técnico 24/7 direto no Discord</p>
+                        <p>✅ Atualizações exclusivas e antecipadas</p>
+                        <p>✅ Comunidade de players ativos</p>
+                        <p>✅ Dicas e tutoriais exclusivos</p>
+                        <p>✅ Ofertas e promoções especiais</p>
+                        <p>✅ Sorteios e eventos frequentes</p>
+                        
+                        <div class="discord-buttons">
+                            <button class="btn-discord" onclick="joinDiscord()">
+                                <i class="fab fa-discord"></i> Entrar no Discord
+                            </button>
+                            <button class="btn-discord" style="background: linear-gradient(135deg, #4a4a4a, #3a3a3a); gap: 8px;" onclick="copyDiscordLink()">
+                                <i class="fas fa-link"></i> Copiar Link
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="discord-profile">
+                        <!-- Dono do Discord Card -->
+                        <div class="discord-card">
+                            <div class="discord-card-banner"></div>
+                            <div class="discord-card-header">
+                                <div class="discord-avatar" style="background-image: url('https://media.discordapp.net/attachments/1281981010497638431/1463398072523685988/b2a0c7c4744b83edd819118b9c74b1bd.png?ex=6971af29&is=69705da9&hm=59c7d1d9c408fb2984b320b0f6ddb32dcacaa38a6e50a393487cdaf2473657d1&=&format=webp&quality=lossless'); background-size: cover; background-position: center;"></div>
+                                <div class="discord-user-info">
+                                    <div class="discord-username">
+                                        gusta9
+                                        <span class="discord-badge">
+                                            <i class="fas fa-crown"></i> Dono
+                                        </span>
+                                    </div>
+                                    <div class="discord-tag">@gusta9</div>
+                                </div>
+                            </div>
+
+                            <div class="discord-status">
+                                <div class="status-indicator"></div>
+                                <span class="discord-status-text">Online • Disponível para suporte</span>
+                            </div>
+
+                            <div class="discord-about">
+                                🎮 Fundador da BXY Softwares | 💻 Developer
+                                <br><br>
+                                Criador dos melhores cheats do mercado com suporte premium. Sempre online para ajudar!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p>&copy; 2026 BXY Softwares. Todos os direitos reservados.</p>
+            <p>Este software é apenas para fins educacionais. Use por sua conta e risco.</p>
+        </footer>
+    </div>
+
+    <!-- ============================================
+         TELA DE LOGIN
+         ============================================ -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="logo-container">
+                <div style="font-size: 3em;">🎯</div>
+                <h1>BXY Web Remote</h1>
+                <p>Control Panel</p>
+            </div>
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Usuário</label>
+                    <input type="text" id="username" placeholder="Digite seu usuário" required>
+                </div>
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="login-btn">Entrar</button>
+                <div class="login-error" id="loginError">
+                    Usuário ou senha inválidos
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Game Selector -->
+    <div id="gameSelector" class="game-selector">
+        <div class="game-selector-container">
+            <div class="game-selector-header">
+                <h1>🎮 Escolha seu Jogo</h1>
+                <p>Selecione qual cheat você deseja controlar</p>
+            </div>
+            
+            <div class="games-grid">
+                <div class="game-card" onclick="selectGame('freefire')">
+                    <div class="game-icon">🔥</div>
+                    <div class="game-name">Free Fire</div>
+                    <div class="game-description">Battle Royale rápido e frenético</div>
+                    <ul class="game-features">
+                        <li>Legit Aimbot</li>
+                        <li>Rage Aimbot</li>
+                        <li>Chams</li>
+                    </ul>
+                </div>
+
+                <div class="game-card" onclick="selectGame('valorant')">
+                    <div class="game-icon">🎯</div>
+                    <div class="game-name">Valorant</div>
+                    <div class="game-description">FPS tático com aim color</div>
+                    <ul class="game-features">
+                        <li>Aim Color</li>
+                        <li>Legit Mode</li>
+                        <li>Rage Mode</li>
+                    </ul>
+                </div>
+
+                <div class="game-card" onclick="selectGame('cs2')">
+                    <div class="game-icon">🎮</div>
+                    <div class="game-name">CS2</div>
+                    <div class="game-description">Counter-Strike 2 competitivo</div>
+                    <ul class="game-features">
+                        <li>Legit Aimbot</li>
+                        <li>Rage Aimbot</li>
+                        <li>ESP</li>
+                    </ul>
+                </div>
+
+                <div class="game-card" onclick="selectGame('fivem')">
+                    <div class="game-icon">🚗</div>
+                    <div class="game-name">FiveM</div>
+                    <div class="game-description">GTA V com mods multiplayer</div>
+                    <ul class="game-features">
+                        <li>ESP System</li>
+                        <li>Teleport</li>
+                        <li>Vehicle Mods</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="game-selector-footer">
+                <a href="#" class="back-to-login" onclick="backToLogin(event)">← Voltar ao Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainContent" class="main-content">
+        <div class="user-info">
+            <div class="user-header">
+                <div class="user-avatar" id="userAvatar">A</div>
+                <div class="user-details">
+                    <div class="user-name" id="displayName">Usuário</div>
+                    <div class="user-product" id="productName">BXY Free Fire</div>
+                </div>
+            </div>
+            <div class="user-subscription">
+                <div>
+                    <div class="days-remaining" id="daysRemaining">⏰ 0 dias</div>
+                    <div class="expiration-date" id="expirationDate">Expira: N/A</div>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="changeGame()" style="margin-bottom: 10px;">🎮 Trocar Jogo</button>
+            <button class="logout-btn" onclick="logout()">🚪 Sair</button>
+        </div>
+
+        <div class="header">
+            <h1 id="dashboardTitle">🎯 BXY Control Panel</h1>
+            <p>Controle remoto via Web Browser</p>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span id="statusText">Conectado</span>
+            </div>
+        </div>
+
+        <!-- Free Fire Features -->
+        <div id="freefireFeatures" style="display: none;">
+        <!-- Legit Aimbot -->
+        <div class="card">
+            <h2>🎮 Legit Aimbot <span class="badge">Safe</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn" onclick="injectLegitAimbot()">
+                    💉 Injetar Legit Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="legitimaimbotToggle" onchange="toggleLegitAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚙️ SETTINGS</h3>
+                <div class="toggle-container" style="margin-bottom: 15px;">
+                    <span class="toggle-label">Vis Check</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="legitVischeck" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="select-container">
+                    <label>🎯 Keybind</label>
+                    <select id="legitKeybind">
+                        <option value="2">Right Mouse</option>
+                        <option value="1">Left Mouse</option>
+                        <option value="87">W</option>
+                        <option value="65">A</option>
+                        <option value="83">S</option>
+                        <option value="68">D</option>
+                        <option value="32">Space</option>
+                        <option value="17">Ctrl</option>
+                    </select>
+                </div>
+
+                <div class="select-container">
+                    <label>Mode</label>
+                    <select id="legitKeybindMode">
+                        <option value="0">Toggle</option>
+                        <option value="1">Hold</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-secondary" onclick="updateLegitKeybind()">
+                    💾 Salvar Keybind
+                </button>
+            </div>
+        </div>
+
+        <!-- Rage Aimbot -->
+        <div class="card">
+            <h2>💥 Rage Aimbot <span class="badge">Inject</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn btn-danger" onclick="injectRageAimbot()">
+                    💉 Injetar Rage Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="rageaimbotToggle" onchange="toggleRageAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚙️ SETTINGS</h3>
+                <div class="toggle-container" style="margin-bottom: 15px;">
+                    <span class="toggle-label">Vis Check</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="rageVischeck" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="select-container">
+                    <label>🎯 Keybind</label>
+                    <select id="rageKeybind">
+                        <option value="2">Right Mouse</option>
+                        <option value="1">Left Mouse</option>
+                        <option value="87">W</option>
+                        <option value="65">A</option>
+                        <option value="83">S</option>
+                        <option value="68">D</option>
+                        <option value="32">Space</option>
+                        <option value="17">Ctrl</option>
+                    </select>
+                </div>
+
+                <div class="select-container">
+                    <label>Mode</label>
+                    <select id="rageKeybindMode">
+                        <option value="0">Toggle</option>
+                        <option value="1">Hold</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-danger" onclick="updateRageKeybind()">
+                    💾 Salvar Keybind
+                </button>
+            </div>
+        </div>
+
+        <!-- Chams (Wallhack) -->
+        <div class="card">
+            <h2>👁️ Chams (Wallhack) <span class="badge">Inject</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn" onclick="injectChams()">
+                    💉 Injetar Chams DLL
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="visualsChams" onchange="toggleChams()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Close Program -->
+        <div class="card">
+            <h2>🚪 Load Bypass</h2>
+                <button class="btn btn-danger" onclick="closeProgram()">
+                     🔴 BYPASS + UNLOAD
+                </button>
+            </div>
+        </div>
+        </div>
+        <!-- End Free Fire Features -->
+
+        <!-- Valorant Features -->
+        <div id="valorantFeatures" style="display: none;">
+        <!-- Aim Color -->
+        <div class="card">
+            <h2>🌈 Aim Color <span class="badge">Custom</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ COLOR PRESETS</h3>
+                <div class="color-picker-container">
+                    <div class="color-option color-red selected" onclick="selectColor('red')" title="Vermelho"></div>
+                    <div class="color-option color-blue" onclick="selectColor('blue')" title="Azul"></div>
+                    <div class="color-option color-green" onclick="selectColor('green')" title="Verde"></div>
+                    <div class="color-option color-yellow" onclick="selectColor('yellow')" title="Amarelo"></div>
+                    <div class="color-option color-purple" onclick="selectColor('purple')" title="Roxo"></div>
+                    <div class="color-option color-cyan" onclick="selectColor('cyan')" title="Ciano"></div>
+                    <div class="color-option color-orange" onclick="selectColor('orange')" title="Laranja"></div>
+                    <div class="color-option color-white" onclick="selectColor('white')" title="Branco"></div>
+                </div>
+                <button class="btn btn-secondary" onclick="applyAimColor()">
+                    🎨 Aplicar Cor
+                </button>
+            </div>
+        </div>
+
+        <!-- Legit Aimbot Valorant -->
+        <div class="card">
+            <h2>🎮 Legit Aimbot <span class="badge">Safe</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn" onclick="injectValorantLegitAimbot()">
+                    💉 Injetar Legit Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="valorantLegitToggle" onchange="toggleValorantLegitAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚙️ SETTINGS</h3>
+                <div class="toggle-container" style="margin-bottom: 15px;">
+                    <span class="toggle-label">Fov Lock</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="valorantLegitFov" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="select-container">
+                    <label>🎯 Keybind</label>
+                    <select id="valorantLegitKeybind">
+                        <option value="2">Right Mouse</option>
+                        <option value="1">Left Mouse</option>
+                        <option value="87">W</option>
+                        <option value="65">A</option>
+                        <option value="83">S</option>
+                        <option value="68">D</option>
+                        <option value="32">Space</option>
+                        <option value="17">Ctrl</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-secondary" onclick="updateValorantLegitKeybind()">
+                    💾 Salvar Keybind
+                </button>
+            </div>
+        </div>
+
+        <!-- Rage Aimbot Valorant -->
+        <div class="card">
+            <h2>💥 Rage Aimbot <span class="badge">Inject</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn btn-danger" onclick="injectValorantRageAimbot()">
+                    💉 Injetar Rage Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="valorantRageToggle" onchange="toggleValorantRageAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⚙️ SETTINGS</h3>
+                <div class="toggle-container" style="margin-bottom: 15px;">
+                    <span class="toggle-label">Headshot Only</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="valorantRageHeadshot" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="select-container">
+                    <label>🎯 Keybind</label>
+                    <select id="valorantRageKeybind">
+                        <option value="2">Right Mouse</option>
+                        <option value="1">Left Mouse</option>
+                        <option value="87">W</option>
+                        <option value="65">A</option>
+                        <option value="83">S</option>
+                        <option value="68">D</option>
+                        <option value="32">Space</option>
+                        <option value="17">Ctrl</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-danger" onclick="updateValorantRageKeybind()">
+                    💾 Salvar Keybind
+                </button>
+            </div>
+        </div>
+
+        <!-- Unload -->
+        <div class="card">
+            <h2>🚪 Descarregar</h2>
+                <button class="btn btn-danger" onclick="unloadValorant()">
+                     🔴 DESCARREGAR VALORANT
+                </button>
+            </div>
+        </div>
+        </div>
+        <!-- End Valorant Features -->
+
+        <!-- CS2 Features -->
+        <div id="cs2Features" style="display: none;">
+        <!-- Legit Aimbot CS2 -->
+        <div class="card">
+            <h2>🎮 Legit Aimbot <span class="badge">Safe</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn" onclick="injectCS2LegitAimbot()">
+                    💉 Injetar Legit Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="cs2LegitToggle" onchange="toggleCS2LegitAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rage Aimbot CS2 -->
+        <div class="card">
+            <h2>💥 Rage Aimbot <span class="badge">Inject</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <button class="btn btn-danger" onclick="injectCS2RageAimbot()">
+                    💉 Injetar Rage Aimbot
+                </button>
+                <div class="toggle-container">
+                    <span class="toggle-label">Status</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="cs2RageToggle" onchange="toggleCS2RageAimbot(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESP CS2 -->
+        <div class="card">
+            <h2>👁️ ESP System <span class="badge">Visual</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <div class="toggle-container">
+                    <span class="toggle-label">ESP Enable</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="cs2ESPToggle" onchange="toggleCS2ESP(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Bones</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="cs2ESPBones" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- End CS2 Features -->
+
+        <!-- FiveM Features -->
+        <div id="fivemFeatures" style="display: none;">
+        
+        <!-- ESP System -->
+        <div class="card">
+            <h2>👁️ ESP System <span class="badge">Visual</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ GENERAL</h3>
+                <div class="toggle-container">
+                    <span class="toggle-label">ESP Players</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemESPPlayers" onchange="toggleFivemESP(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Nomes</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemNames" onchange="toggleFivemNames(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Distância</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemDistance" onchange="toggleFivemDistance(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Vehicle ESP</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemVehicles" onchange="toggleFivemVehicles(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teleport -->
+        <div class="card">
+            <h2>🌐 Teleport <span class="badge">Movement</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ WAYPOINT</h3>
+                <button class="btn" onclick="teleportWaypoint()">
+                    📍 Teleportar para Waypoint
+                </button>
+                
+                <h3 style="margin-top: 30px;">⚙️ COORDINATES</h3>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <label>X</label>
+                    <input type="number" id="teleportX" placeholder="Coordenada X">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <label>Y</label>
+                    <input type="number" id="teleportY" placeholder="Coordenada Y">
+                </div>
+                <div class="input-group" style="margin-bottom: 10px;">
+                    <label>Z</label>
+                    <input type="number" id="teleportZ" placeholder="Coordenada Z">
+                </div>
+                <button class="btn" onclick="teleportCoords()">
+                    🚀 Teleportar para Coordenadas
+                </button>
+            </div>
+        </div>
+
+        <!-- Character Mods -->
+        <div class="card">
+            <h2>⚡ Character Mods <span class="badge">Player</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ MOVEMENT</h3>
+                <div class="toggle-container">
+                    <span class="toggle-label">Super Speed</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemSpeed" onchange="toggleFivemSpeed(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Super Jump</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemJump" onchange="toggleFivemJump(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Noclip</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemNoclip" onchange="toggleFivemNoclip(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <h3 style="margin-top: 30px;">⚙️ HEALTH</h3>
+                <div class="toggle-container">
+                    <span class="toggle-label">God Mode</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemGodmode" onchange="toggleFivemGodmode(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Stamina Infinita</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemStamina" onchange="toggleFivemStamina(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicle Mods -->
+        <div class="card">
+            <h2>🚗 Vehicle Mods <span class="badge">Vehicle</span></h2>
+            
+            <div class="section">
+                <h3>⚙️ VEHICLE</h3>
+                <div class="toggle-container">
+                    <span class="toggle-label">Vehicle God Mode</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemVehicleGod" onchange="toggleFivemVehicleGod(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">Vehicle Super Speed</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemVehicleSpeed" onchange="toggleFivemVehicleSpeed(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-container">
+                    <span class="toggle-label">RGB Vehicle</span>
+                    <label class="toggle">
+                        <input type="checkbox" id="fivemVehicleRGB" onchange="toggleFivemVehicleRGB(this.checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <button class="btn" style="margin-top: 15px;" onclick="repairVehicle()">
+                    🔧 Reparar Veículo
+                </button>
+            </div>
+        </div>
+
+        </div>
+        <!-- End FiveM Features -->
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // ============================================
+        // 🔧 CONFIGURAÇÃO DE HOSPEDAGEM
+        // ============================================
+        const CONFIG = {
+            mode: 'remote',
+            localAPI: 'http://localhost:8080',
+            remoteAPI: 'https://discloud-server.onrender.com',
+            authAPI: 'https://duplicatinor3000.discloud.app/auth',
+            discordURL: 'https://discord.gg/yHW6j7je',
+            timeout: 3000
+        };
+
+        let API_URL = CONFIG.localAPI;
+        const AUTH_API_URL = CONFIG.authAPI;
+
+        async function detectAPI() {
+            if (CONFIG.mode === 'local') {
+                API_URL = CONFIG.localAPI;
+                console.log('🏠 Modo LOCAL ativado:', API_URL);
+                return;
+            }
+            
+            if (CONFIG.mode === 'remote') {
+                API_URL = CONFIG.remoteAPI;
+                console.log('🌐 Modo REMOTO ativado:', API_URL);
+                return;
+            }
+
+            console.log('🔍 Detectando API automaticamente...');
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout);
+                
+                const response = await fetch(`${CONFIG.localAPI}/api/status`, {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (response.ok) {
+                    API_URL = CONFIG.localAPI;
+                    console.log('✅ API local disponível:', API_URL);
+                    return;
+                }
+            } catch (error) {
+                console.log('⚠️ API local não disponível, tentando remota...');
+            }
+
+            try {
+                const response = await fetch(`${CONFIG.remoteAPI}/api/status`);
+                if (response.ok) {
+                    API_URL = CONFIG.remoteAPI;
+                    console.log('✅ API remota disponível:', API_URL);
+                    return;
+                }
+            } catch (error) {
+                console.log('❌ Nenhuma API disponível');
+            }
+
+            API_URL = CONFIG.localAPI;
+            console.log('⚠️ Usando API local como fallback');
+        }
+
+        detectAPI();
+
+        // ============================================
+        // NAVEGAÇÃO ENTRE LANDING PAGE E LOGIN
+        // ============================================
+        
+        function openDiscord(event) {
+            if (event) event.preventDefault();
+            window.open(CONFIG.discordURL, '_blank');
+        }
+        
+        function showLogin(event) {
+            if (event) event.preventDefault();
+            
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('loginScreen').classList.add('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        function showLanding() {
+            document.getElementById('landingPage').classList.remove('hidden');
+            document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('gameSelector').classList.remove('active');
+            document.getElementById('mainContent').classList.remove('active');
+            
+            window.scrollTo(0, 0);
+        }
+
+        function selectGame(game) {
+            console.log('Jogo selecionado:', game);
+            
+            sessionStorage.setItem('selectedGame', game);
+            
+            let productName = 'BXY ';
+            if (game === 'freefire') {
+                productName += 'Free Fire';
+            } else if (game === 'valorant') {
+                productName += 'Valorant';
+            } else if (game === 'cs2') {
+                productName += 'CS2';
+            } else if (game === 'fivem') {
+                productName += 'FiveM';
+            }
+            
+            document.getElementById('productName').textContent = productName;
+            sessionStorage.setItem('productName', productName);
+            
+            const gameSelector = document.getElementById('gameSelector');
+            const mainContent = document.getElementById('mainContent');
+            
+            gameSelector.classList.remove('active');
+            
+            setTimeout(() => {
+                mainContent.style.display = 'block';
+                mainContent.classList.add('active');
+                
+                showNotification(`🎮 ${productName} ativado!`);
+                
+                initializeApp();
+                updateGameFeatures(game);
+            }, 300);
+        }
+
+        function changeGame() {
+            const mainContent = document.getElementById('mainContent');
+            const gameSelector = document.getElementById('gameSelector');
+            
+            mainContent.classList.remove('active');
+            
+            setTimeout(() => {
+                mainContent.style.display = 'none';
+                gameSelector.classList.add('active');
+                showNotification('🎮 Selecione outro jogo');
+            }, 300);
+        }
+
+        function backToLogin(event) {
+            if (event) event.preventDefault();
+            
+            const gameSelector = document.getElementById('gameSelector');
+            const loginScreen = document.getElementById('loginScreen');
+            
+            gameSelector.classList.remove('active');
+            
+            setTimeout(() => {
+                loginScreen.style.display = 'flex';
+                loginScreen.classList.add('active');
+            }, 300);
+        }
+
+        function updateGameFeatures(game) {
+            const title = document.getElementById('dashboardTitle');
+            const freefireFeatures = document.getElementById('freefireFeatures');
+            const valorantFeatures = document.getElementById('valorantFeatures');
+            const cs2Features = document.getElementById('cs2Features');
+            const fivemFeatures = document.getElementById('fivemFeatures');
+            
+            // Hide all first
+            freefireFeatures.style.display = 'none';
+            valorantFeatures.style.display = 'none';
+            cs2Features.style.display = 'none';
+            fivemFeatures.style.display = 'none';
+            
+            if (game === 'freefire') {
+                title.textContent = '🔥 BXY Free Fire Control Panel';
+                freefireFeatures.style.display = 'block';
+            } else if (game === 'valorant') {
+                title.textContent = '🎯 BXY Valorant Control Panel';
+                valorantFeatures.style.display = 'block';
+            } else if (game === 'cs2') {
+                title.textContent = '🎮 BXY CS2 Control Panel';
+                cs2Features.style.display = 'block';
+            } else if (game === 'fivem') {
+                title.textContent = '🚗 BXY FiveM Control Panel';
+                fivemFeatures.style.display = 'block';
+            }
+        }
+
+        // ============================================
+        // VALORANT FUNCTIONS
+        // ============================================
+        
+        let selectedColor = 'red';
+
+        function selectColor(color) {
+            // Remove selected class from all colors
+            document.querySelectorAll('.color-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked color
+            event.target.classList.add('selected');
+            selectedColor = color;
+            showNotification(`🎨 Cor ${color} selecionada`);
+        }
+
+        async function applyAimColor() {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/valorant/aimcolor`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ color: selectedColor, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `✅ Cor ${selectedColor} aplicada!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao aplicar cor', true);
+            }
+        }
+
+        async function injectValorantLegitAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/valorant/legit/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Legit Aimbot Valorant injetado!', !data.success);
+                if (data.success) {
+                    document.getElementById('valorantLegitToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Legit Aimbot', true);
+            }
+        }
+
+        async function toggleValorantLegitAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/valorant/legit/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Legit Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Legit Aimbot', true);
+            }
+        }
+
+        async function injectValorantRageAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/valorant/rage/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Rage Aimbot Valorant injetado!', !data.success);
+                if (data.success) {
+                    document.getElementById('valorantRageToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Rage Aimbot', true);
+            }
+        }
+
+        async function toggleValorantRageAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/valorant/rage/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Rage Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Rage Aimbot', true);
+            }
+        }
+
+        async function updateValorantLegitKeybind() {
+            const keybind = parseInt(document.getElementById('valorantLegitKeybind').value);
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/valorant/legit/keybind`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ keybind, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Keybind salva!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao salvar keybind', true);
+            }
+        }
+
+        async function updateValorantRageKeybind() {
+            const keybind = parseInt(document.getElementById('valorantRageKeybind').value);
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/valorant/rage/keybind`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ keybind, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Keybind salva!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao salvar keybind', true);
+            }
+        }
+
+        async function unloadValorant() {
+            if (confirm('Descarregar Valorant cheat?')) {
+                try {
+                    const response = await fetch(`${API_URL}/api/valorant/unload`, { method: 'POST' });
+                    const data = await response.json();
+                    showNotification(data.message || 'Valorant descarregado!', !data.success);
+                } catch (error) {
+                    showNotification('Erro ao descarregar', true);
+                }
+            }
+        }
+
+        // ============================================
+        // CS2 FUNCTIONS
+        // ============================================
+
+        async function injectCS2LegitAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/cs2/legit/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Legit Aimbot CS2 injetado!', !data.success);
+                if (data.success) {
+                    document.getElementById('cs2LegitToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Legit Aimbot', true);
+            }
+        }
+
+        async function toggleCS2LegitAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/cs2/legit/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Legit Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Legit Aimbot', true);
+            }
+        }
+
+        async function injectCS2RageAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/cs2/rage/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Rage Aimbot CS2 injetado!', !data.success);
+                if (data.success) {
+                    document.getElementById('cs2RageToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Rage Aimbot', true);
+            }
+        }
+
+        async function toggleCS2RageAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/cs2/rage/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Rage Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Rage Aimbot', true);
+            }
+        }
+
+        async function toggleCS2ESP(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/cs2/esp/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `ESP ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar ESP', true);
+            }
+        }
+
+        // ============================================
+        // FiveM FUNCTIONS
+        // ============================================
+        
+        function toggleFivemESP(enabled) {
+            showNotification(enabled ? '✅ ESP Ativado' : '❌ ESP Desativado');
+        }
+        
+        function toggleFivemNames(enabled) {
+            showNotification(enabled ? '✅ Nomes Ativados' : '❌ Nomes Desativados');
+        }
+        
+        function toggleFivemDistance(enabled) {
+            showNotification(enabled ? '✅ Distância Ativada' : '❌ Distância Desativada');
+        }
+        
+        function toggleFivemVehicles(enabled) {
+            showNotification(enabled ? '✅ Vehicle ESP Ativado' : '❌ Vehicle ESP Desativado');
+        }
+        
+        function teleportWaypoint() {
+            showNotification('📍 Teleportando para waypoint...');
+        }
+        
+        function teleportCoords() {
+            const x = document.getElementById('teleportX').value;
+            const y = document.getElementById('teleportY').value;
+            const z = document.getElementById('teleportZ').value;
+            showNotification(`🚀 Teleportando para (${x}, ${y}, ${z})...`);
+        }
+        
+        function toggleFivemSpeed(enabled) {
+            showNotification(enabled ? '⚡ Super Speed Ativado' : '❌ Super Speed Desativado');
+        }
+        
+        function toggleFivemJump(enabled) {
+            showNotification(enabled ? '⚡ Super Jump Ativado' : '❌ Super Jump Desativado');
+        }
+        
+        function toggleFivemNoclip(enabled) {
+            showNotification(enabled ? '👻 Noclip Ativado' : '❌ Noclip Desativado');
+        }
+        
+        function toggleFivemGodmode(enabled) {
+            showNotification(enabled ? '🛡️ God Mode Ativado' : '❌ God Mode Desativado');
+        }
+        
+        function toggleFivemStamina(enabled) {
+            showNotification(enabled ? '⚡ Stamina Infinita Ativada' : '❌ Stamina Normal');
+        }
+        
+        function toggleFivemVehicleGod(enabled) {
+            showNotification(enabled ? '🛡️ Vehicle God Mode Ativado' : '❌ Vehicle God Mode Desativado');
+        }
+        
+        function toggleFivemVehicleSpeed(enabled) {
+            showNotification(enabled ? '⚡ Vehicle Super Speed Ativado' : '❌ Vehicle Speed Normal');
+        }
+        
+        function toggleFivemVehicleRGB(enabled) {
+            showNotification(enabled ? '🌈 RGB Ativado' : '❌ RGB Desativado');
+        }
+        
+        function repairVehicle() {
+            showNotification('🔧 Veículo reparado!');
+        }
+
+        // ============================================
+        // FREE FIRE FUNCTIONS
+        // ============================================
+
+        async function injectLegitAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/legit/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Legit Aimbot injetado com sucesso!', !data.success);
+                
+                if (data.success) {
+                    document.getElementById('legitimaimbotToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Legit Aimbot', true);
+            }
+        }
+
+        async function toggleLegitAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/legit/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Legit Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Legit Aimbot', true);
+            }
+        }
+
+        async function injectRageAimbot() {
+            try {
+                const response = await fetch(`${API_URL}/api/rage/inject`, { method: 'POST' });
+                const data = await response.json();
+                showNotification(data.message || 'Rage Aimbot injetado com sucesso!', !data.success);
+                
+                if (data.success) {
+                    document.getElementById('rageaimbotToggle').checked = true;
+                }
+            } catch (error) {
+                showNotification('Erro ao injetar Rage Aimbot', true);
+            }
+        }
+
+        async function toggleRageAimbot(enabled) {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/rage/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Rage Aimbot ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Rage Aimbot', true);
+            }
+        }
+
+        async function injectChams() {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/chams/inject`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Chams DLL injetada com sucesso!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao injetar Chams', true);
+            }
+        }
+
+        async function toggleChams() {
+            const enabled = document.getElementById('visualsChams').checked;
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/chams/toggle`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || `Chams ${enabled ? 'ativado' : 'desativado'}!`, !data.success);
+            } catch (error) {
+                showNotification('Erro ao alterar Chams', true);
+            }
+        }
+
+        async function updateLegitKeybind() {
+            const enabled = document.getElementById('legitKeybindEnabled').checked;
+            const keybind = parseInt(document.getElementById('legitKeybind').value);
+            const keybindmode = parseInt(document.getElementById('legitKeybindMode').value);
+            
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/legit/keybind`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, keybind, keybindmode, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Keybind Legit salva com sucesso!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao salvar keybind', true);
+            }
+        }
+
+        async function updateRageKeybind() {
+            const enabled = document.getElementById('rageKeybindEnabled').checked;
+            const keybind = parseInt(document.getElementById('rageKeybind').value);
+            const keybindmode = parseInt(document.getElementById('rageKeybindMode').value);
+            
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/rage/keybind`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled, keybind, keybindmode, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Keybind Rage salva com sucesso!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao salvar keybind', true);
+            }
+        }
+
+        async function updateSettings() {
+            const topmost = document.getElementById('settingsTopmost').checked;
+            const stream = parseInt(document.getElementById('settingsStream').value);
+            
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/settings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topmost, stream, username })
+                });
+                const data = await response.json();
+                showNotification(data.message || 'Configurações salvas!', !data.success);
+            } catch (error) {
+                showNotification('Erro ao salvar configurações', true);
+            }
+        }
+
+        async function loadConfig() {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/config/load`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                const data = await response.json();
+                showNotification('Config recarregada com sucesso!', false);
+            } catch (error) {
+                showNotification('Erro ao recarregar config', true);
+            }
+        }
+
+        async function checkStatus() {
+            const statusElement = document.getElementById('status');
+            const statusTextElement = document.getElementById('statusText');
+            
+            try {
+                const response = await fetch(`${API_URL}/api/status`);
+                if (response.ok) {
+                    statusElement.classList.remove('offline', 'remote');
+                    statusTextElement.textContent = 'Conectado';
+                } else {
+                    statusElement.classList.add('offline');
+                    statusTextElement.textContent = 'Offline';
+                }
+            } catch (error) {
+                statusElement.classList.add('offline');
+                statusTextElement.textContent = 'Offline';
+            }
+        }
+
+        async function loadBypass() {
+            try {
+                const username = sessionStorage.getItem('username');
+                const response = await fetch(`${API_URL}/api/bypass/load`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
+                const data = await response.json();
+                showNotification(data.message || '🚀 Bypass carregado com sucesso!');
+            } catch (error) {
+                showNotification('Erro ao carregar bypass', true);
+            }
+        }
+
+        async function closeProgram() {
+            if (confirm('⚠️ Tem certeza que deseja dar o bypass?')) {
+                try {
+                    const username = sessionStorage.getItem('username');
+                    const response = await fetch(`${API_URL}/api/bypass/close`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username })
+                    });
+                    const data = await response.json();
+                    showNotification(data.message || '✅ Bypass executado!', !data.success);
+                } catch (error) {
+                    showNotification('Erro ao executar bypass', true);
+                }
+            }
+        }
+
+        async function emergencyStop() {
+            if (confirm('Deseja realmente executar a parada de emergência?')) {
+                try {
+                    const username = sessionStorage.getItem('username');
+                    const response = await fetch(`${API_URL}/api/emergency/stop`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username })
+                    });
+                    const data = await response.json();
+                    showNotification(data.message || '🛑 Parada de emergência executada!', !data.success);
+                } catch (error) {
+                    showNotification('Erro na parada de emergência', true);
+                }
+            }
+        }
+
+        function initializeApp() {
+            const username = sessionStorage.getItem('username');
+            const productName = sessionStorage.getItem('productName') || 'BXY Free Fire';
+            const daysRemaining = sessionStorage.getItem('daysRemaining') || '0';
+            const expirationDate = sessionStorage.getItem('expirationDate') || 'N/A';
+            
+            document.getElementById('displayName').textContent = username;
+            document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+            document.getElementById('productName').textContent = productName;
+            document.getElementById('daysRemaining').textContent = `⏰ ${daysRemaining} dias`;
+            document.getElementById('expirationDate').textContent = `Expira: ${expirationDate}`;
+            
+            checkStatus();
+            setInterval(checkStatus, 30000);
+        }
+
+        // ============================================
+        // DISCORD FUNCTIONS
+        // ============================================
+
+        function joinDiscord() {
+            window.open(CONFIG.discordURL, '_blank');
+            showNotification('🎉 Bem-vindo ao Discord BXY!');
+        }
+
+        function copyDiscordLink() {
+            const link = CONFIG.discordURL;
+            navigator.clipboard.writeText(link).then(() => {
+                showNotification('✅ Link do Discord copiado para a área de transferência!');
+            }).catch(err => {
+                showNotification('❌ Erro ao copiar link', true);
+            });
+        }
+
+        // Gerar HWID baseado no navegador
+        function generateHWID() {
+            const nav = navigator;
+            const screen = window.screen;
+            let hwid = 'BXY-WEB-';
+            
+            hwid += nav.userAgent.replace(/\s/g, '').substring(0, 20) + '-';
+            hwid += screen.width + 'x' + screen.height + '-';
+            hwid += nav.hardwareConcurrency || '4';
+            
+            let hash = 0;
+            for (let i = 0; i < hwid.length; i++) {
+                const char = hwid.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            
+            return 'BXY-' + Math.abs(hash).toString(16).toUpperCase();
+        }
+
+        function getLocalIP() {
+            return 'web-client';
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginError = document.getElementById('loginError');
+            const loginBtn = event.target.querySelector('button[type="submit"]');
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Entrando...';
+            loginError.classList.remove('show');
+            
+            try {
+                const hwid = generateHWID();
+                const ipAddress = getLocalIP();
+                
+                const response = await fetch(`${AUTH_API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password, hwid, ipAddress })
+                });
+                
+                const data = await response.json();
+                console.log('Resposta da API:', data);
+                
+                const isSuccess = data.success === true || (data.success !== false && data.user);
+                const user = data.user || data;
+                
+                if (isSuccess && user && user.username) {
+                    sessionStorage.setItem('loggedIn', 'true');
+                    sessionStorage.setItem('username', user.username);
+                    sessionStorage.setItem('daysRemaining', user.daysRemaining || '0');
+                    sessionStorage.setItem('expirationDate', user.expirationDate || 'N/A');
+                    
+                    document.getElementById('loginScreen').classList.remove('active');
+                    document.getElementById('loginScreen').style.display = 'none';
+                    
+                    setTimeout(() => {
+                        document.getElementById('gameSelector').classList.add('active');
+                        showNotification('✅ Login realizado com sucesso!');
+                    }, 300);
+                    
+                } else {
+                    loginError.textContent = '❌ Usuário ou senha inválidos!';
+                    loginError.classList.add('show');
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Entrar';
+                }
+                
+            } catch (error) {
+                console.error('Erro no login:', error);
+                loginError.textContent = '❌ Erro de conexão com o servidor!';
+                loginError.classList.add('show');
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Entrar';
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            showLanding();
+        }
+
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + (isError ? 'error' : 'success') + ' show';
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Check if already logged in
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('gameSelector').classList.add('active');
+            initializeApp();
+        } else {
+            document.getElementById('landingPage').classList.remove('hidden');
+            document.getElementById('loginScreen').classList.remove('active');
+            document.getElementById('mainContent').classList.remove('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !href.includes('onclick')) {
+                    const element = document.querySelector(href);
+                    if (element) {
+                        e.preventDefault();
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
