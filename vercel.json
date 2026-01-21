@@ -1,5 +1,9 @@
 {
   "buildCommand": "",
-  "outputDirectory": "./",
-  "public": true
+  "devCommand": "vercel dev",
+  "installCommand": "",
+  "env": {},
+  "regions": ["iad"],
+  "functions": {},
+  "rewrites": []
 }
