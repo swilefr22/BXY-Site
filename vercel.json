@@ -2,8 +2,5 @@
   "buildCommand": "",
   "devCommand": "vercel dev",
   "installCommand": "",
-  "env": {},
-  "regions": ["iad"],
-  "functions": {},
-  "rewrites": []
+  "regions": ["iad"]
 }
